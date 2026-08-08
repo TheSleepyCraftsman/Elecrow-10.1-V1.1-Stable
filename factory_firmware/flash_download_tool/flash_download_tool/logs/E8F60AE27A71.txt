@@ -1,0 +1,749 @@
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:48
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:48
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:49
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:50
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:50
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:51
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:52
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:52
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+Wrote 237728 bytes (44072 compressed) at 0x00002000 in 4.5 seconds (effective 422.4 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+File  md5: deb6fd3760db65b28380e529f03dcc08
+Flash md5: deb6fd3760db65b28380e529f03dcc08
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 8 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:53
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Wrote 237452 bytes (44039 compressed) at 0x00008000 in 4.2 seconds (effective 456.4 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+File  md5: 24cc15ee1d86b6a68d537a7785a13243
+Flash md5: 24cc15ee1d86b6a68d537a7785a13243
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 8 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:53
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 65536 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+Wrote 237628 bytes (44122 compressed) at 0x00010000 in 4.4 seconds (effective 430.7 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+File  md5: caaceea3b334ba50fb70595ed0580305
+Flash md5: caaceea3b334ba50fb70595ed0580305
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 8 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:53
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 11599872 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\storage.bin
+Wrote 237308 bytes (44089 compressed) at 0x00b10000 in 4.4 seconds (effective 432.3 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\storage.bin
+File  md5: 3c816fdc63fb6de32afa341a5dc0a672
+Flash md5: 3c816fdc63fb6de32afa341a5dc0a672
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 8 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:54
+Connect baud: 115200
+Com:COM6
+serial port open error
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:54
+Connect baud: 115200
+Com:COM6
+serial port open error
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-17:54
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-18:59
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-18:59
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Erase button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:11
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+set STOP FLG: Truecom closed
+Total use time: 69 s
+Download result: PASS
+*************************** END ****************************
+
+set state: ESP_DL_STOP
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:12
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:12
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:12
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+Wrote 237728 bytes (44072 compressed) at 0x00002000 in 4.4 seconds (effective 427.7 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+File  md5: deb6fd3760db65b28380e529f03dcc08
+Flash md5: deb6fd3760db65b28380e529f03dcc08
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 8 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:12
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+address/file: 65536 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:13
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+Wrote 237728 bytes (44072 compressed) at 0x00002000 in 4.5 seconds (effective 427.3 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+File  md5: deb6fd3760db65b28380e529f03dcc08
+Flash md5: deb6fd3760db65b28380e529f03dcc08
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 8 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:13
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Wrote 237452 bytes (44039 compressed) at 0x00008000 in 4.2 seconds (effective 456.3 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+File  md5: 24cc15ee1d86b6a68d537a7785a13243
+Flash md5: 24cc15ee1d86b6a68d537a7785a13243
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 8 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:13
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 65536 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+address/file: 11599872 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\storage.bin
+Wrote 237628 bytes (44122 compressed) at 0x00010000 in 4.4 seconds (effective 435.3 kbit/s)...
+Wrote 237308 bytes (44089 compressed) at 0x00b10000 in 4.3 seconds (effective 438.0 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+File  md5: caaceea3b334ba50fb70595ed0580305
+Flash md5: caaceea3b334ba50fb70595ed0580305
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\storage.bin
+File  md5: 3c816fdc63fb6de32afa341a5dc0a672
+Flash md5: 3c816fdc63fb6de32afa341a5dc0a672
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 13 s
+Download result: PASS
+*************************** END ****************************
+
+Erase button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:15
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+set STOP FLG: Trueset state: ESP_DL_STOP
+Erase button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:16
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:17
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:18
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 65536 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:19
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 131072 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:19
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 131072 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:19
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 327680 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Wrote 237728 bytes (44072 compressed) at 0x00000000 in 1.8 seconds (effective 1076.2 kbit/s)...
+Wrote 237452 bytes (44039 compressed) at 0x00050000 in 1.8 seconds (effective 1052.8 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+File  md5: deb6fd3760db65b28380e529f03dcc08
+Flash md5: deb6fd3760db65b28380e529f03dcc08
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+File  md5: 24cc15ee1d86b6a68d537a7785a13243
+Flash md5: 24cc15ee1d86b6a68d537a7785a13243
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 8 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:19
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 327680 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Wrote 237728 bytes (44072 compressed) at 0x00000000 in 1.8 seconds (effective 1074.4 kbit/s)...
+Wrote 237452 bytes (44039 compressed) at 0x00050000 in 1.7 seconds (effective 1086.1 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+File  md5: deb6fd3760db65b28380e529f03dcc08
+Flash md5: deb6fd3760db65b28380e529f03dcc08
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+File  md5: 24cc15ee1d86b6a68d537a7785a13243
+Flash md5: 24cc15ee1d86b6a68d537a7785a13243
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 8 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:19
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 327680 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+address/file: 479232 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:20
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 327680 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+address/file: 544768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:20
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 327680 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+address/file: 1048576 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+address/file: 11599872 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\storage.bin
+Wrote 237728 bytes (44072 compressed) at 0x00000000 in 1.8 seconds (effective 1073.4 kbit/s)...
+Wrote 237452 bytes (44039 compressed) at 0x00050000 in 1.8 seconds (effective 1075.4 kbit/s)...
+Wrote 237628 bytes (44122 compressed) at 0x00100000 in 1.8 seconds (effective 1043.6 kbit/s)...
+Wrote 237308 bytes (44089 compressed) at 0x00b10000 in 1.8 seconds (effective 1057.1 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+File  md5: deb6fd3760db65b28380e529f03dcc08
+Flash md5: deb6fd3760db65b28380e529f03dcc08
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+File  md5: 24cc15ee1d86b6a68d537a7785a13243
+Flash md5: 24cc15ee1d86b6a68d537a7785a13243
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+File  md5: caaceea3b334ba50fb70595ed0580305
+Flash md5: caaceea3b334ba50fb70595ed0580305
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\storage.bin
+File  md5: 3c816fdc63fb6de32afa341a5dc0a672
+Flash md5: 3c816fdc63fb6de32afa341a5dc0a672
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 13 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:55
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\target.bin
+Wrote 11837180 bytes (190201 compressed) at 0x00000000 in 69.1 seconds (effective 1369.7 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\target.bin
+File  md5: d5c626197b526763e7b39e7bcbe7f796
+Flash md5: d5c626197b526763e7b39e7bcbe7f796
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 92 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:57
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 4096 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:58
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 0 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260716-19:58
+Connect baud: 115200
+Com:COM6
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260717-22:25
+Connect baud: 115200
+Com:COM7
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+address/file: 65536 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+address/file: 11599872 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\storage.bin
+Wrote 23424 bytes (14330 compressed) at 0x00002000 in 0.5 seconds (effective 387.6 kbit/s)...
+Wrote 3072 bytes (120 compressed) at 0x00008000 in 0.0 seconds (effective 1821.8 kbit/s)...
+Wrote 9736640 bytes (2515879 compressed) at 0x00010000 in 75.0 seconds (effective 1039.1 kbit/s)...
+Wrote 4194304 bytes (3199542 compressed) at 0x00b10000 in 51.3 seconds (effective 653.9 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+File  md5: e689ba92d8704951606f127a4f66f509
+Flash md5: e689ba92d8704951606f127a4f66f509
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+File  md5: fb579c28bd7acf59c7e4d1bedcc97b3a
+Flash md5: fb579c28bd7acf59c7e4d1bedcc97b3a
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+File  md5: 4f2d9d27fecd958819e8d17d608e9a0b
+Flash md5: 4f2d9d27fecd958819e8d17d608e9a0b
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\storage.bin
+File  md5: d0ecd9b6879696f5dbcd220e2d7628a3
+Flash md5: d0ecd9b6879696f5dbcd220e2d7628a3
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 161 s
+Download result: PASS
+*************************** END ****************************
+
+Download button pressed
+*************************** START ****************************
+Chip: ESP32P4
+Download mode: uart
+Start time: 20260718-00:31
+Connect baud: 115200
+Com:COM7
+connecting...
+manufacturer_id: 0xba
+device_id: 0x4018
+fs:0x600200
+address/file: 8192 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+address/file: 32768 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+address/file: 65536 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+address/file: 11599872 C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\storage.bin
+Wrote 23424 bytes (14330 compressed) at 0x00002000 in 0.5 seconds (effective 406.6 kbit/s)...
+Wrote 3072 bytes (120 compressed) at 0x00008000 in 0.0 seconds...
+Wrote 9736640 bytes (2515879 compressed) at 0x00010000 in 73.5 seconds (effective 1060.4 kbit/s)...
+Wrote 4194304 bytes (3199542 compressed) at 0x00b10000 in 47.7 seconds (effective 703.1 kbit/s)...
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\bootloader.bin
+File  md5: e689ba92d8704951606f127a4f66f509
+Flash md5: e689ba92d8704951606f127a4f66f509
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\partition-table.bin
+File  md5: fb579c28bd7acf59c7e4d1bedcc97b3a
+Flash md5: fb579c28bd7acf59c7e4d1bedcc97b3a
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\esp_brookesia_demo.bin
+File  md5: 4f2d9d27fecd958819e8d17d608e9a0b
+Flash md5: 4f2d9d27fecd958819e8d17d608e9a0b
+Hash of data verified.
+File: C:\Users\reada\Downloads\flash_download_tool\flash_download_tool\dl_temp\bin_tmp\downloadPanel1\storage.bin
+File  md5: d0ecd9b6879696f5dbcd220e2d7628a3
+Flash md5: d0ecd9b6879696f5dbcd220e2d7628a3
+Hash of data verified.
+
+Leaving...
+com closed
+Total use time: 152 s
+Download result: PASS
+*************************** END ****************************
+
