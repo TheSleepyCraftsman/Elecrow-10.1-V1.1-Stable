@@ -1,0 +1,7 @@
+build/
+#managed_components/
+#dependencies.lock
+#sdkconfig
+#sdkconfig.old
+#components/ota_littlefs/slave_fw_bin/*.bin
+#components/ota_littlefs/slave_fw_bin/.gitkeep
