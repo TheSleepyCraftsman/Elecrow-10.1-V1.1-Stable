@@ -3,5 +3,3 @@ dependencies.lock
 managed_components
 sdkconfig
 sdkconfig.old
-# Example project files
-examples/*
