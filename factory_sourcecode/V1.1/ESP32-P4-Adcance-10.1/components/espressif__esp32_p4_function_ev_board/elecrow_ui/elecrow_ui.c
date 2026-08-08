@@ -170,7 +170,7 @@ void elecrow_loading_screen(void)
     lv_obj_set_style_bg_opa(Elecrow_P_bar_screen, LV_OPA_COVER, LV_PART_MAIN | LV_STATE_DEFAULT);
     
     Load_bg_img = lv_img_create(Elecrow_P_bar_screen);
-    lv_img_set_src(Load_bg_img, &loading_background_inch9);
+    lv_img_set_src(Load_bg_img, &loading_background_inch10_1);
     lv_obj_align(Load_bg_img, LV_ALIGN_CENTER, 0, 0);
     
     Load_frame_img = lv_img_create(Load_bg_img);

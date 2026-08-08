@@ -496,7 +496,6 @@ esp_err_t AppSettings::initWifi()
 
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
     ESP_ERROR_CHECK(esp_wifi_start());
-
     return ESP_OK;
 }
 
@@ -663,6 +662,24 @@ void AppSettings::euiRefresTask(void *arg)
         if((xEventGroupGetBits(s_wifi_event_group) & WIFI_EVENT_CONNECTED)) {
             app_sntp_init();
 
+            // Query active Wi-Fi AP info to set the signal strength level
+            wifi_ap_record_t ap_info;
+            if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK) {
+                int rssi = ap_info.rssi;
+                if (rssi >= -55) {
+                    app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_GOOD;
+                } else if (rssi >= -70) {
+                    app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_MODERATE;
+                } else if (rssi >= -85) {
+                    app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_WEAK;
+                } else {
+                    app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_NONE;
+                }
+            } else {
+                // Default to good signal strength if connected but couldn't get RSSI yet
+                app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_GOOD;
+            }
+
             bsp_display_lock(0);
             if(app->_wifi_signal_strength_level == WIFI_SIGNAL_STRENGTH_NONE) {
                 app->status_bar->setWifiIconState(0);
@@ -673,6 +690,10 @@ void AppSettings::euiRefresTask(void *arg)
             } else if (app->_wifi_signal_strength_level == WIFI_SIGNAL_STRENGTH_GOOD) {
                 app->status_bar->setWifiIconState(3);
             }
+            bsp_display_unlock();
+        } else {
+            bsp_display_lock(0);
+            app->status_bar->setWifiIconState(0);
             bsp_display_unlock();
         }
 

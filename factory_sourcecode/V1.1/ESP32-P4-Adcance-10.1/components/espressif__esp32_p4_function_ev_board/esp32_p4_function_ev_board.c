@@ -383,6 +383,12 @@ esp_codec_dev_handle_t bsp_audio_codec_microphone_init(void)
 
 esp_err_t bsp_display_brightness_init(void)
 {
+    static bool brightness_inited = false;
+    if (brightness_inited) {
+        return ESP_OK;
+    }
+    brightness_inited = true;
+
     // Setup LEDC peripheral for PWM backlight control
     const ledc_channel_config_t LCD_backlight_channel = {
         .gpio_num = BSP_LCD_BACKLIGHT,
@@ -403,6 +409,16 @@ esp_err_t bsp_display_brightness_init(void)
 
     BSP_ERROR_CHECK_RETURN_ERR(ledc_timer_config(&LCD_backlight_timer));
     BSP_ERROR_CHECK_RETURN_ERR(ledc_channel_config(&LCD_backlight_channel));
+    gpio_set_drive_capability(BSP_LCD_BACKLIGHT, GPIO_DRIVE_CAP_0);
+
+    // Boost SDIO pins to maximum drive capability to ensure clean transitions and reduce noise
+    gpio_set_drive_capability(GPIO_NUM_14, GPIO_DRIVE_CAP_3);
+    gpio_set_drive_capability(GPIO_NUM_15, GPIO_DRIVE_CAP_3);
+    gpio_set_drive_capability(GPIO_NUM_16, GPIO_DRIVE_CAP_3);
+    gpio_set_drive_capability(GPIO_NUM_17, GPIO_DRIVE_CAP_3);
+    gpio_set_drive_capability(GPIO_NUM_18, GPIO_DRIVE_CAP_3);
+    gpio_set_drive_capability(GPIO_NUM_19, GPIO_DRIVE_CAP_3);
+
     return ESP_OK;
 }
 
@@ -423,7 +439,7 @@ esp_err_t bsp_display_brightness_set(int brightness_percent)
 
     s_brightness_percent = brightness_percent;
     ESP_LOGI(TAG, "Setting LCD backlight: %d%%", brightness_percent);
-    uint32_t duty_cycle = (1023 * brightness_percent) / 100; // LEDC resolution set to 10bits, thus: 100% = 1023
+    uint32_t duty_cycle = (1024 * brightness_percent) / 100; // LEDC resolution set to 10bits, thus: 100% = 1024
     BSP_ERROR_CHECK_RETURN_ERR(ledc_set_duty(LEDC_LOW_SPEED_MODE, LCD_LEDC_CH, duty_cycle));
     BSP_ERROR_CHECK_RETURN_ERR(ledc_update_duty(LEDC_LOW_SPEED_MODE, LCD_LEDC_CH));
     return ESP_OK;
