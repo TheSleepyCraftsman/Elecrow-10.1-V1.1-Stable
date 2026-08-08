@@ -1,3 +1,18 @@
+I procured my display from Amazon. The ESP32-P4 included is an early engineering revision (1.3). There are significant differences between the full-rate production version (3.X) and what you can get off of Amazon currently. 
+
+I really wish that the seller would disclose that on the listing. With that said, it's fine for DIY projects. 
+
+I hope this will help you get up and running with a stable baseline to develop from. I have gotten pretty close to how the factory firmware performs. I will document open issues as I go. Currently, I am still experiencing slight screen flickering at higher brightnesses, but it's within the acceptable limits, well, at least for me it it. 
+
+I will eventually upload the following:
+
+ESP32-C6 Firmware Upgrade Directions
+
+Stock ESP32-P4 Firmware Build Directions
+
+This has taken me almost a month to figure out. It would be really nice of Elecrow would actually upload they exact configuration used to compile the factory Firmware as the currently uploaded source code does not produce the exact same BIN files. 
+
+
 ### 1, Product picture
 
 <img width="1000" height="1000" alt="image" src="https://github.com/user-attachments/assets/830afcf3-9947-4487-b87e-5d0eea8ad645" />
