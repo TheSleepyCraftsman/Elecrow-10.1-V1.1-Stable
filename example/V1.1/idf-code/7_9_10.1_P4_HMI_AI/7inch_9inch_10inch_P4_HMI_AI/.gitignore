@@ -1,18 +1,23 @@
 tmp/
+<<<<<<< HEAD
 # components/
 # managed_components/
+=======
+components/
+managed_components/
+>>>>>>> parent of 0464d91 (Adding AI Example)
 build/
 .vscode/
 .devcontainer/
-# sdkconfig.old
-# sdkconfig
-# dependencies.lock
+sdkconfig.old
+sdkconfig
+dependencies.lock
 .env
 releases/
-# main/assets/lang_config.h
-# main/mmap_generate_emoji.h
+main/assets/lang_config.h
+main/mmap_generate_emoji.h
 .DS_Store
 .cache
 *.pyc
 *.bin
-# mmap_generate_*.h
+mmap_generate_*.h

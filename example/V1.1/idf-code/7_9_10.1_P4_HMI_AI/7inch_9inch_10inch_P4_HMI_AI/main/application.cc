@@ -129,10 +129,10 @@ void Application::CheckAssetsVersion() {
     display->SetEmotion("microchip_ai");
 }
 
-bool Application::CheckNewVersion(Ota& ota) {
-    const int MAX_RETRY = 1;
+void Application::CheckNewVersion(Ota& ota) {
+    const int MAX_RETRY = 10;
     int retry_count = 0;
-    int retry_delay = 5; // Initial retry delay: 5 seconds
+    int retry_delay = 10; // 初始重试延迟为10秒
 
     auto& board = Board::GetInstance();
     while (true) {
@@ -144,7 +144,7 @@ bool Application::CheckNewVersion(Ota& ota) {
             retry_count++;
             if (retry_count >= MAX_RETRY) {
                 ESP_LOGE(TAG, "Too many retries, exit version check");
-                return false;
+                return;
             }
 
             char buffer[256];
@@ -158,10 +158,11 @@ bool Application::CheckNewVersion(Ota& ota) {
                     break;
                 }
             }
+            retry_delay *= 2; // 每次重试后延迟时间翻倍
             continue;
         }
         retry_count = 0;
-        retry_delay = 5;
+        retry_delay = 10; // 重置重试延迟时间
 
         if (ota.HasNewVersion()) {
             Alert(Lang::Strings::OTA_UPGRADE, Lang::Strings::UPGRADING, "download", Lang::Sounds::OGG_UPGRADE);
@@ -179,6 +180,7 @@ bool Application::CheckNewVersion(Ota& ota) {
 
             auto& app = Application::GetInstance();
             bool upgrade_success = ota.StartUpgrade([&app, display](int progress, size_t speed) {
+                // 使用 Schedule 在主事件循环中更新显示，避免使用 std::thread
                 char buffer[32];
                 snprintf(buffer, sizeof(buffer), "%d%% %uKB/s", progress, speed / 1024);
                 app.Schedule([display, message = std::string(buffer)]() {
@@ -187,31 +189,38 @@ bool Application::CheckNewVersion(Ota& ota) {
             });
 
             if (!upgrade_success) {
+                // Upgrade failed, restart audio service and continue running
                 ESP_LOGE(TAG, "Firmware upgrade failed, restarting audio service and continuing operation...");
-                audio_service_.Start();
-                board.SetPowerSaveMode(true);
+                audio_service_.Start(); // Restart audio service
+                board.SetPowerSaveMode(true); // Restore power save mode
                 Alert(Lang::Strings::ERROR, Lang::Strings::UPGRADE_FAILED, "circle_xmark", Lang::Sounds::OGG_EXCLAMATION);
                 vTaskDelay(pdMS_TO_TICKS(3000));
+                // Continue to normal operation (don't break, just fall through)
             } else {
+                // Upgrade success, reboot immediately
                 ESP_LOGI(TAG, "Firmware upgrade successful, rebooting...");
                 display->SetChatMessage("system", "Upgrade successful, rebooting...");
-                vTaskDelay(pdMS_TO_TICKS(1000));
+                vTaskDelay(pdMS_TO_TICKS(1000)); // Brief pause to show message
                 Reboot();
-                return true;
+                return; // This line will never be reached after reboot
             }
         }
 
+        // No new version, mark the current version as valid
         ota.MarkCurrentVersionValid();
         if (!ota.HasActivationCode() && !ota.HasActivationChallenge()) {
             xEventGroupSetBits(event_group_, MAIN_EVENT_CHECK_NEW_VERSION_DONE);
+            // Exit the loop if done checking new version
             break;
         }
 
         display->SetStatus(Lang::Strings::ACTIVATION);
+        // Activation code is shown to the user and waiting for the user to input
         if (ota.HasActivationCode()) {
             ShowActivationCode(ota.GetActivationCode(), ota.GetActivationMessage());
         }
 
+        // This will block the loop until the activation is done or timeout
         for (int i = 0; i < 10; ++i) {
             ESP_LOGI(TAG, "Activating... %d/%d", i + 1, 10);
             esp_err_t err = ota.Activate();
@@ -228,7 +237,6 @@ bool Application::CheckNewVersion(Ota& ota) {
             }
         }
     }
-    return true;
 }
 
 void Application::ShowActivationCode(const std::string& code, const std::string& message) {
@@ -419,7 +427,7 @@ void Application::Start() {
 
     // Check for new firmware version or get the MQTT broker address
     Ota ota;
-    bool version_check_success = CheckNewVersion(ota);
+    CheckNewVersion(ota);
 
     // Initialize the protocol
     display->SetStatus(Lang::Strings::LOADING_PROTOCOL);
@@ -429,27 +437,13 @@ void Application::Start() {
     mcp_server.AddCommonTools();
     mcp_server.AddUserOnlyTools();
 
-    if (version_check_success && ota.HasMqttConfig()) {
+    if (ota.HasMqttConfig()) {
         protocol_ = std::make_unique<MqttProtocol>();
-    } else if (version_check_success && ota.HasWebsocketConfig()) {
+    } else if (ota.HasWebsocketConfig()) {
         protocol_ = std::make_unique<WebsocketProtocol>();
     } else {
-        if (!version_check_success) {
-            ESP_LOGW(TAG, "Version check failed, bypassing and using cached settings");
-            ota.MarkCurrentVersionValid(); // Prevent rollback
-        }
-        Settings websocket_settings("websocket", false);
-        Settings mqtt_settings("mqtt", false);
-        if (!websocket_settings.GetString("url").empty()) {
-            ESP_LOGI(TAG, "Using cached Websocket configuration");
-            protocol_ = std::make_unique<WebsocketProtocol>();
-        } else if (!mqtt_settings.GetString("endpoint").empty()) {
-            ESP_LOGI(TAG, "Using cached MQTT configuration");
-            protocol_ = std::make_unique<MqttProtocol>();
-        } else {
-            ESP_LOGW(TAG, "No cached protocol configuration found, using MQTT default");
-            protocol_ = std::make_unique<MqttProtocol>();
-        }
+        ESP_LOGW(TAG, "No protocol specified in the OTA config, using MQTT");
+        protocol_ = std::make_unique<MqttProtocol>();
     }
 
     protocol_->OnConnected([this]() {

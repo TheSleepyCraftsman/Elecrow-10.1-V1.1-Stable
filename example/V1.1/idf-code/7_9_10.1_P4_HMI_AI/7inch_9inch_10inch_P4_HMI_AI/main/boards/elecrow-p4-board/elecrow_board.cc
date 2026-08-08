@@ -331,22 +331,22 @@ public:
         
         // If not configured, add default Wi-Fi
         if (ssid_list.empty()) {
-            ESP_LOGI(TAG, "No WiFi configured, adding default WiFi: Twisty 5GHz");
-            ssid_manager.AddSsid("Twisty 5GHz", "leadership");
+            ESP_LOGI(TAG, "No WiFi configured, adding default WiFi: elecrow888");
+            ssid_manager.AddSsid("elecrow888", "elecrow2014");
             ESP_LOGI(TAG, "Default WiFi added successfully");
         } else {
-            // Check if Twisty 5GHz already exists, if not then add it
+            // Check if elecrow888 already exists, if not then add it
             bool found = false;
             for (const auto& item : ssid_list) {
-                if (item.ssid == "Twisty 5GHz") {
+                if (item.ssid == "elecrow888") {
                     found = true;
-                    ESP_LOGI(TAG, "WiFi 'Twisty 5GHz' already configured");
+                    ESP_LOGI(TAG, "WiFi 'elecrow888' already configured");
                     break;
                 }
             }
             if (!found) {
-                ESP_LOGI(TAG, "Adding default WiFi: Twisty 5GHz");
-                ssid_manager.AddSsid("Twisty 5GHz", "leadership");
+                ESP_LOGI(TAG, "Adding default WiFi: elecrow888");
+                ssid_manager.AddSsid("elecrow888", "elecrow2014");
                 ESP_LOGI(TAG, "Default WiFi added successfully");
             }
         }
