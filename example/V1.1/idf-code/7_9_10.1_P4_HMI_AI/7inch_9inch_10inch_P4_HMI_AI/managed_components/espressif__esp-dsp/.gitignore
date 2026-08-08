@@ -22,11 +22,7 @@ GPATH
 .DS_Store
 
 # Example project files
-examples/**/sdkconfig
-examples/**/sdkconfig.old
-examples/**/build
-examples/**/dependencies.lock
-exmaples/**/managed_components
+examples/*
 
 # Test app files
 test_app/build
