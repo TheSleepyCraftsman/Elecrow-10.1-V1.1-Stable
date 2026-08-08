@@ -1,4 +1,13 @@
-I procured my display from Amazon. The ESP32-P4 included is an early engineering revision (1.3). There are significant differences between the full-rate production version (3.X) and what you can get off of Amazon currently. 
+This fork will only be applicable to the Elecrow ESP32-P4 Advanced 10.1" v1.1 Display. 
+
+Elecrow has 3 hardware revisions out there: 
+1.0
+1.1
+1.2
+
+They are not the same and require different configurations!
+
+I procured my v1.1 display from Amazon. The ESP32-P4 included is an early engineering revision (1.3). There are significant differences between the full-rate production version (3.X) and what you can get off of Amazon currently. 
 
 I really wish that the seller would disclose that on the listing. With that said, it's fine for DIY projects. 
 
