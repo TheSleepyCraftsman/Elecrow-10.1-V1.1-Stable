@@ -1,0 +1,41 @@
+menu "Zigbee Gateway"
+
+    config ZIGBEE_GATEWAY_ENABLED
+        bool "Enable Zigbee Gateway (requires ESP32-H2 in wireless socket)"
+        select ZB_ENABLED
+        default n
+        help
+            Enables the Zigbee coordinator component, which connects to the
+            ESP32-H2 RCP via UART2 (P4 GPIO 53 TX / GPIO 54 RX).
+            The H2 must be flashed with the ot_rcp firmware from
+            C:/ESPProjects/Elecrow-Zigbee-Gateway/h2_rcp.
+
+    if ZIGBEE_GATEWAY_ENABLED
+
+        config ZIGBEE_GW_UART_TX_PIN
+            int "P4 UART2 TX GPIO (to H2 RXD)"
+            default 53
+            help
+                P4 GPIO connected to H2 U1RXD (GPIO 24) via wireless socket.
+
+        config ZIGBEE_GW_UART_RX_PIN
+            int "P4 UART2 RX GPIO (from H2 TXD)"
+            default 54
+            help
+                P4 GPIO connected to H2 U1TXD (GPIO 23) via wireless socket.
+
+        config ZIGBEE_GW_UART_BAUD
+            int "UART baud rate"
+            default 460800
+            help
+                Must match CONFIG_OPENTHREAD_RCP_UART baud rate on the H2.
+
+        config ZIGBEE_GW_H2_BOOT_PIN
+            int "H2 BOOT pin GPIO"
+            default 9
+            help
+                P4 GPIO connected to H2 IO9 (boot strapping) via wireless socket.
+
+    endif
+
+endmenu

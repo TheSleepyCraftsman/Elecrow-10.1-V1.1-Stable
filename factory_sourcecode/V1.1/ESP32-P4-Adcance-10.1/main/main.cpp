@@ -21,6 +21,7 @@
 #include "esp_sleep.h"
 #include "driver/rtc_io.h"
 #include "esp_timer.h"
+#include "zigbee_gateway.h"
 
 static const char *TAG = "main";
 
@@ -136,6 +137,14 @@ extern "C" void app_main(void)
         esp_deep_sleep_start();
     }
     xTaskCreate(battery_info_task, "battery_info_task", 4096, NULL, 3, &battery_info_task_handle);
+
+#if CONFIG_ZIGBEE_GATEWAY_ENABLED
+    /* Start Zigbee coordinator (H2 RCP via UART2 GPIO 53/54) */
+    esp_err_t zb_err = zigbee_gateway_start();
+    if (zb_err != ESP_OK) {
+        ESP_LOGW(TAG, "Zigbee gateway start failed: %s", esp_err_to_name(zb_err));
+    }
+#endif
 
     bsp_display_cfg_t cfg = {
         .lvgl_port_cfg = ESP_LVGL_PORT_INIT_CONFIG(),

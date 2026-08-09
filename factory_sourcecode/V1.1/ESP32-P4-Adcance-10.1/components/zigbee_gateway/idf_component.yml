@@ -1,0 +1,5 @@
+## Zigbee Gateway managed component dependencies
+dependencies:
+  idf: ">=5.1"
+  espressif/esp-zigbee-lib:
+    version: "^2.0.3"

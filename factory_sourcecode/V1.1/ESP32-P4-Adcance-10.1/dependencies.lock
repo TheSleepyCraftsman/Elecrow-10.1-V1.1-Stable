@@ -92,6 +92,16 @@ dependencies:
     - esp32s3
     - esp32p4
     version: 3.1.0
+  espressif/esp-zigbee-lib:
+    component_hash: 8e815d149f904b3429100d8735a2ed81dea38caff3e2b5e38e5751ffc0af6d89
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 2.0.3
   espressif/esp_cam_sensor:
     component_hash: 7b110b08542aeae833895dacd74425e926dd36eed68ae1a26f2b6109e04ea984
     dependencies:
@@ -145,7 +155,7 @@ dependencies:
   espressif/esp_ipa:
     dependencies: []
     source:
-      path: C:\ESPProjects\FactorySource\ESP32-P4-Adcance-brookesia_phone_inch10_1 (1)\components\espressif__esp_ipa
+      path: C:\ESPProjects\Elecrow-10.1-V1.1-Stable\factory_sourcecode\V1.1\ESP32-P4-Adcance-10.1\components\espressif__esp_ipa
       type: local
     version: 0.2.0
   espressif/esp_jpeg:
@@ -197,7 +207,7 @@ dependencies:
       type: service
     version: 1.2.1
   espressif/esp_lcd_touch_gt911:
-    component_hash: 6029febef66eefd0910d527d7f30292779ccbf22a8dedd2bd69466acf0068a7b
+    component_hash: 07f678e4202d79bbad917805dcec4134ff08344177720f32ec4898267ad9e394
     dependencies:
     - name: espressif/esp_lcd_touch
       registry_url: https://components.espressif.com
@@ -209,11 +219,11 @@ dependencies:
     source:
       registry_url: https://components.espressif.com/
       type: service
-    version: 1.2.0~2
+    version: 1.2.0~3
   espressif/esp_lvgl_port:
     dependencies: []
     source:
-      path: C:\ESPProjects\FactorySource\ESP32-P4-Adcance-brookesia_phone_inch10_1 (1)\components\espressif__esp_lvgl_port
+      path: C:\ESPProjects\Elecrow-10.1-V1.1-Stable\factory_sourcecode\V1.1\ESP32-P4-Adcance-10.1\components\espressif__esp_lvgl_port
       type: local
     version: 2.9.0
   espressif/esp_sccb_intf:
@@ -315,6 +325,7 @@ direct_dependencies:
 - espressif/cmake_utilities
 - espressif/esp-brookesia
 - espressif/esp-dl
+- espressif/esp-zigbee-lib
 - espressif/esp_codec_dev
 - espressif/esp_h264
 - espressif/esp_hosted
@@ -326,6 +337,6 @@ direct_dependencies:
 - espressif/esp_wifi_remote
 - idf
 - lvgl/lvgl
-manifest_hash: 0d6123b4fc52a2b4b4203eabfe8eaffcc0fbe85462d801f7987ee97248a7d0d9
+manifest_hash: eca9f0fdd857f733f654a96ad8e6fb0468807abd5eae8fd6c326ecfa58fcccd3
 target: esp32p4
 version: 2.0.0
