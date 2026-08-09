@@ -847,7 +847,10 @@ void AppSettings::wifiEventHandler(void* arg, esp_event_base_t event_base, int32
 {
     AppSettings *app = (AppSettings *)arg;
 
-    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED) {
+    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
+        ESP_LOGI(TAG, "Wi-Fi started, calling esp_wifi_connect() to auto-connect to cached AP...");
+        esp_wifi_connect();
+    } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED) {
         xEventGroupSetBits(s_wifi_event_group, WIFI_EVENT_CONNECTED);
         ESP_LOGI(TAG, "connected to ap SSID:%s, password:%s.", st_wifi_ssid, st_wifi_password);
     } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {

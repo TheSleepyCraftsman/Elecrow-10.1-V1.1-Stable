@@ -50,8 +50,8 @@ void battery_info_task(void *param)
         // ESP_LOGI(TAG, "bat_level = %d %%", battery_info.bat_level);
         // ESP_LOGI(TAG, "bat_state = %d", battery_info.bat_state);
         // ESP_LOGI(TAG, "led_state = %d", battery_info.led_state);
-        if (battery_info.bat_voltage <= 3500) {
-            ESP_LOGI(TAG, "esp_deep_sleep_start()");
+        if (battery_info.bat_voltage <= 3500 && battery_info.bat_state != 1 && battery_info.bat_state != 2) {
+            ESP_LOGI(TAG, "Battery voltage low (%lu mV) and not charging, entering deep sleep...", battery_info.bat_voltage);
             vTaskDelay(100 / portTICK_PERIOD_MS);
             esp_deep_sleep_start();
         }
@@ -130,8 +130,8 @@ extern "C" void app_main(void)
     ESP_LOGI(TAG, "bat_level = %d %%", battery_info.bat_level);
     ESP_LOGI(TAG, "bat_state = %d", battery_info.bat_state);
     ESP_LOGI(TAG, "led_state = %d", battery_info.led_state);
-    if (battery_info.bat_voltage <= 3500) {
-        ESP_LOGI(TAG, "esp_deep_sleep_start()");
+    if (battery_info.bat_voltage <= 3500 && battery_info.bat_state != 1 && battery_info.bat_state != 2) {
+        ESP_LOGI(TAG, "Battery voltage low (%lu mV) and not charging, entering deep sleep...", battery_info.bat_voltage);
         vTaskDelay(100 / portTICK_PERIOD_MS);
         esp_deep_sleep_start();
     }

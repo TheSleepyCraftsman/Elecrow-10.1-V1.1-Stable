@@ -54,8 +54,8 @@ void app_sntp_init(void)
     time(&now);
     localtime_r(&now, &timeinfo);
 
-    // Set timezone to China Standard Time
-    setenv("TZ", "CST-8", 1);
+    // Set timezone to US Eastern Time (EST/EDT)
+    setenv("TZ", "EST5EDT,M3.2.0,M11.1.0", 1);
     tzset();
     // Is time set? If not, tm_year will be (1970 - 1900).
     if (timeinfo.tm_year < (2016 - 1900)) {
