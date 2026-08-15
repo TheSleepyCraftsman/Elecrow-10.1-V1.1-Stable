@@ -1,3 +1,4 @@
+#include "bsp/esp32_p4_function_ev_board.h"
 /*
  * SPDX-FileCopyrightText: 2015-2024 Espressif Systems (Shanghai) CO LTD
  *
@@ -89,7 +90,7 @@ esp_err_t bsp_extra_codec_set_fs(uint32_t rate, uint32_t bits_cfg, i2s_slot_mode
         .bits_per_sample = bits_cfg,
     };
 
-    if (play_dev_handle) {
+        if (play_dev_handle) {
         ret = esp_codec_dev_close(play_dev_handle);
     }
     if (record_dev_handle) {
@@ -103,12 +104,16 @@ esp_err_t bsp_extra_codec_set_fs(uint32_t rate, uint32_t bits_cfg, i2s_slot_mode
     if (record_dev_handle) {
         ret |= esp_codec_dev_open(record_dev_handle, &fs);
     }
-    return ret;
+        return ret;
 }
 
 esp_err_t bsp_extra_codec_volume_set(int volume, int *volume_set)
 {
-    ESP_RETURN_ON_ERROR(esp_codec_dev_set_out_vol(play_dev_handle, volume), TAG, "Set Codec volume failed");
+        esp_err_t err = esp_codec_dev_set_out_vol(play_dev_handle, volume);
+        if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Set Codec volume failed");
+        return err;
+    }
     _vloume_intensity = volume;
 
     ESP_LOGI(TAG, "Setting volume: %d", volume);

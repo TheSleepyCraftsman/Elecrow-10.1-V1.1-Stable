@@ -25,7 +25,7 @@ i2c_master_dev_handle_t i2c_dev_register(uint16_t dev_device_address)
     i2c_device_config_t cfg = {
         .dev_addr_length = I2C_ADDR_BIT_LEN_7,
         .device_address = dev_device_address,
-        .scl_speed_hz = 400000,
+        .scl_speed_hz = CONFIG_BSP_I2C_CLK_SPEED_HZ,
     };
     err = i2c_master_bus_add_device(bsp_i2c_get_handle(), &cfg, &dev_handle);
     if (err == ESP_OK)
@@ -70,6 +70,7 @@ esp_err_t stc8_battery_info_get(Battery_info_t *bat_info)
             STC8H1KXX_ERROR("stc8 read battery info fail");
             return err;
         }
+        vTaskDelay(pdMS_TO_TICKS(1));
     }
     return err;
 }

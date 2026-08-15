@@ -37,26 +37,25 @@ uint8_t led_state;
 */
 void battery_info_task(void *param)
 {
+    vTaskDelay(pdMS_TO_TICKS(10000)); /* Wait 10s for boot animation to finish */
     while (1)
     {
         Battery_info_t battery_info = {0};
-        stc8_battery_info_get(&battery_info);
+        if (bsp_display_lock(pdMS_TO_TICKS(100))) {
+            stc8_battery_info_get(&battery_info);
+            bsp_display_unlock();
+        }
         adc_voltage = battery_info.adc_voltage;
         bat_voltage = battery_info.bat_voltage;
         bat_level   = battery_info.bat_level;
         bat_state   = battery_info.bat_state;
         led_state   = battery_info.led_state;
-        // ESP_LOGI(TAG, "adc_voltage = %lu mV", battery_info.adc_voltage);
-        // ESP_LOGI(TAG, "bat_voltage = %lu mV", battery_info.bat_voltage);
-        // ESP_LOGI(TAG, "bat_level = %d %%", battery_info.bat_level);
-        // ESP_LOGI(TAG, "bat_state = %d", battery_info.bat_state);
-        // ESP_LOGI(TAG, "led_state = %d", battery_info.led_state);
-        if (battery_info.bat_voltage <= 3500 && battery_info.bat_state != 1 && battery_info.bat_state != 2) {
+        if (battery_info.bat_voltage <= 3500 && battery_info.bat_state != 1 && battery_info.bat_state != 2 && battery_info.bat_voltage > 0) {
             ESP_LOGI(TAG, "Battery voltage low (%lu mV) and not charging, entering deep sleep...", battery_info.bat_voltage);
             vTaskDelay(100 / portTICK_PERIOD_MS);
             esp_deep_sleep_start();
         }
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        vTaskDelay(pdMS_TO_TICKS(15000)); /* Poll every 15 seconds */
     }
 }
 
@@ -65,38 +64,30 @@ static int s_prev_brightness = 0;
 static bool s_enter_sleep_flag = false;
 void touch_detect_task(void *param)
 {
-    lv_indev_t *active_indev = lv_indev_get_act();  // Get the currently active input device
     while (1)
     {
-        static uint32_t prev_boot_time_s = 0;
-        uint32_t boot_time_s = esp_timer_get_time() / 1000 / 1000;
+        uint32_t inactive_ms = 0;
+        if (bsp_display_lock(pdMS_TO_TICKS(50))) {
+            inactive_ms = lv_disp_get_inactive_time(NULL);
+            bsp_display_unlock();
+        }
 
-        uint16_t touch_x[1];
-        uint16_t touch_y[1];
-        uint8_t touch_cnt = 0;
-
-        bool touchpad_pressed = esp_lcd_touch_get_coordinates(tp, touch_x, touch_y, NULL, &touch_cnt, 1);
-        /*There are clicks on the touchscreen.*/
-        if (touch_cnt) {
-            prev_boot_time_s = boot_time_s;
-            // If the screen was off before, restore the brightness
+        if (inactive_ms < 60000) {
+            /* User clicked/touched screen: restore brightness if it was sleeping */
             if (s_enter_sleep_flag) {
-                s_enter_sleep_flag = !s_enter_sleep_flag;
+                s_enter_sleep_flag = false;
                 bsp_display_brightness_set(s_prev_brightness);
             }
         }
         else {
+            /* Inactive for > 60 seconds: turn off backlight */
             if (!s_enter_sleep_flag) {
-                /* If there is no touch and it is in the non-screen-off state, and it 
-                    has not been touched for more than a certain period of time, it enters the screen-off state*/
-                if (60 < boot_time_s-prev_boot_time_s) {
-                    s_enter_sleep_flag = !s_enter_sleep_flag;
-                    s_prev_brightness = bsp_display_brightness_get();
-                    bsp_display_brightness_set(0);
-                }
+                s_enter_sleep_flag = true;
+                s_prev_brightness = bsp_display_brightness_get();
+                bsp_display_brightness_set(0);
             }
         }
-        vTaskDelay(100 / portTICK_PERIOD_MS);
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
 
@@ -136,30 +127,12 @@ extern "C" void app_main(void)
         vTaskDelay(100 / portTICK_PERIOD_MS);
         esp_deep_sleep_start();
     }
+
+    bsp_display_start();
+    bsp_display_brightness_set(25);
+
     xTaskCreate(battery_info_task, "battery_info_task", 4096, NULL, 3, &battery_info_task_handle);
-
-#if CONFIG_ZIGBEE_GATEWAY_ENABLED
-    /* Start Zigbee coordinator (H2 RCP via UART2 GPIO 53/54) */
-    esp_err_t zb_err = zigbee_gateway_start();
-    if (zb_err != ESP_OK) {
-        ESP_LOGW(TAG, "Zigbee gateway start failed: %s", esp_err_to_name(zb_err));
-    }
-#endif
-
-    bsp_display_cfg_t cfg = {
-        .lvgl_port_cfg = ESP_LVGL_PORT_INIT_CONFIG(),
-        .buffer_size = BSP_LCD_H_RES * BSP_LCD_V_RES,
-        .double_buffer = BSP_LCD_DRAW_BUFF_DOUBLE,
-        .flags = {
-            .buff_dma = false,
-            .buff_spiram = true,
-            .sw_rotate = false,
-        }
-    };
-    bsp_display_start_with_config(&cfg);
-    bsp_display_backlight_on();
-
-    xTaskCreate(touch_detect_task, "touch_detect_task", 2048, NULL, 3, &battery_info_task_handle);
+    xTaskCreate(touch_detect_task, "touch_detect_task", 2048, NULL, 3, NULL);
 
     bsp_display_lock(0);
     elecrow_screen();
@@ -169,6 +142,7 @@ extern "C" void app_main(void)
     {
         vTaskDelay(10 / portTICK_PERIOD_MS);
     }
+
 
     bsp_display_lock(0);
 
@@ -216,4 +190,17 @@ extern "C" void app_main(void)
 #endif
 
     bsp_display_unlock();
+
+#if CONFIG_ZIGBEE_GATEWAY_ENABLED
+    /* Delay Zigbee coordinator startup by 5s to allow UI and touch drivers to settle */
+    xTaskCreate([](void *) {
+        vTaskDelay(pdMS_TO_TICKS(5000));
+        ESP_LOGI(TAG, "Starting Zigbee Gateway in background (5s after UI boot)...");
+        esp_err_t zb_err = zigbee_gateway_start();
+        if (zb_err != ESP_OK) {
+            ESP_LOGW(TAG, "Zigbee gateway start failed: %s", esp_err_to_name(zb_err));
+        }
+        vTaskDelete(NULL);
+    }, "zb_delayed_start", 4096, NULL, 3, NULL);
+#endif
 }

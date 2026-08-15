@@ -86,7 +86,7 @@ static lv_obj_t* img_img_wifi_lock[SCAN_LIST_SIZE];
 static lv_obj_t* wifi_image[SCAN_LIST_SIZE];
 static lv_obj_t* wifi_connect[SCAN_LIST_SIZE];
 
-static int brightness;
+static int brightness = 25;
 
 LV_IMG_DECLARE(img_wifisignal_absent);
 LV_IMG_DECLARE(img_wifisignal_wake);
@@ -194,10 +194,14 @@ bool AppSettings::init(void)
     _nvs_param_map[NVS_KEY_AUDIO_VOLUME] = bsp_extra_codec_volume_get();
     _nvs_param_map[NVS_KEY_AUDIO_VOLUME] = max(min((int)_nvs_param_map[NVS_KEY_AUDIO_VOLUME], SPEAKER_VOLUME_MAX), SPEAKER_VOLUME_MIN);
     // _nvs_param_map[NVS_KEY_DISPLAY_BRIGHTNESS] = bsp_display_brightness_get();
-    _nvs_param_map[NVS_KEY_DISPLAY_BRIGHTNESS] = brightness;
+    _nvs_param_map[NVS_KEY_DISPLAY_BRIGHTNESS] = 25;
     _nvs_param_map[NVS_KEY_DISPLAY_BRIGHTNESS] = max(min((int)_nvs_param_map[NVS_KEY_DISPLAY_BRIGHTNESS], SCREEN_BRIGHTNESS_MAX), SCREEN_BRIGHTNESS_MIN);
     // Load NVS parameters if exist
     loadNvsParam();
+    // Ensure default brightness is at least 25%
+    if (_nvs_param_map[NVS_KEY_DISPLAY_BRIGHTNESS] < 25) {
+        _nvs_param_map[NVS_KEY_DISPLAY_BRIGHTNESS] = 25;
+    }
     // Update System parameters
     bsp_extra_codec_volume_set(_nvs_param_map[NVS_KEY_AUDIO_VOLUME], (int *)&_nvs_param_map[NVS_KEY_AUDIO_VOLUME]);
     bsp_display_brightness_set(_nvs_param_map[NVS_KEY_DISPLAY_BRIGHTNESS]);

@@ -128,37 +128,37 @@ void esp_zb_app_signal_handler(esp_zb_app_signal_t *signal_message)
 
 static void zigbee_task(void *pvParameters)
 {
-    /* Coordinator configuration */
-    esp_zb_cfg_t zb_cfg = {
-        .esp_zb_role          = ESP_ZB_DEVICE_TYPE_COORDINATOR,
-        .install_code_policy  = false,
-        .nwk_cfg.zczr_cfg = {
-            .max_children = 32,
+    /* New 2.x config structure */
+    esp_zigbee_config_t config = {
+        .device_config = {
+            .device_type = EZB_NWK_DEVICE_TYPE_COORDINATOR,
+            .install_code_policy = false,
+            .zczr_config = {
+                .max_children = 32,
+            },
         },
-    };
-
-    /* Platform config: radio via UART2 to H2 RCP */
-    esp_zb_platform_config_t platform_cfg = {
-        .radio_config = {
-            .radio_mode = ZB_RADIO_MODE_UART_RCP,
-            .radio_uart_config = {
-                .port   = UART_NUM_2,
-                .rx_pin = 54,           /* P4 RXD2 <- H2 GPIO 23 (U1TXD) */
-                .tx_pin = 53,           /* P4 TXD2 -> H2 GPIO 24 (U1RXD) */
-                .uart_config = {
-                    .baud_rate  = 460800,
-                    .data_bits  = UART_DATA_8_BITS,
-                    .parity     = UART_PARITY_DISABLE,
-                    .stop_bits  = UART_STOP_BITS_1,
-                    .flow_ctrl  = UART_HW_FLOWCTRL_DISABLE,
-                    .source_clk = UART_SCLK_DEFAULT,
+        .platform_config = {
+            .storage_partition_name = "nvs",
+            .radio_config = {
+                .radio_mode = ESP_ZIGBEE_RADIO_MODE_UART_RCP,
+                .radio_uart_config = {
+                    .port   = UART_NUM_2,
+                    .rx_pin = 54,           /* P4 RXD2 <- H2 GPIO 23 (U1TXD) */
+                    .tx_pin = 53,           /* P4 TXD2 -> H2 GPIO 24 (U1RXD) */
+                    .uart_config = {
+                        .baud_rate  = 460800,
+                        .data_bits  = UART_DATA_8_BITS,
+                        .parity     = UART_PARITY_DISABLE,
+                        .stop_bits  = UART_STOP_BITS_1,
+                        .flow_ctrl  = UART_HW_FLOWCTRL_DISABLE,
+                        .source_clk = UART_SCLK_DEFAULT,
+                    },
                 },
             },
         },
     };
 
-    ESP_ERROR_CHECK(esp_zb_platform_config(&platform_cfg));
-    esp_zb_init(&zb_cfg);
+    ESP_ERROR_CHECK(esp_zigbee_init(&config));
 
     /* Use all channels (11-26), let stack pick the best */
     esp_zb_set_channel_mask(ESP_ZB_TRANSCEIVER_ALL_CHANNELS_MASK);
@@ -182,8 +182,8 @@ esp_err_t zigbee_gateway_start(void)
     memset(s_devices, 0, sizeof(s_devices));
     s_device_count = 0;
 
-    BaseType_t ret = xTaskCreate(zigbee_task, "zigbee_gw", 4096, NULL,
-                                  configMAX_PRIORITIES - 5, NULL);
+    BaseType_t ret = xTaskCreatePinnedToCore(zigbee_task, "zigbee_gw", 8192, NULL,
+                                             5, NULL, 1);
     if (ret != pdPASS) return ESP_FAIL;
 
     ESP_LOGI(TAG, "Zigbee gateway component started");

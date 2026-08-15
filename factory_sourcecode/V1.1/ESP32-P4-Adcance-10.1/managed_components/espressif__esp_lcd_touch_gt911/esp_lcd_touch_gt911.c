@@ -229,11 +229,13 @@ static esp_err_t esp_lcd_touch_gt911_read_data(esp_lcd_touch_handle_t tp)
     size_t i = 0;
 
     err = touch_gt911_i2c_read(tp, ESP_LCD_TOUCH_GT911_READ_XY_REG, buf, 1);
-    ESP_RETURN_ON_ERROR(err, TAG, "I2C read error!");
+    if (err != ESP_OK) {
+        return ESP_OK;
+    }
 
     /* Any touch data? */
     if ((buf[0] & 0x80) == 0x00) {
-        touch_gt911_i2c_write(tp, ESP_LCD_TOUCH_GT911_READ_XY_REG, clear);
+        return ESP_OK;
 #if (CONFIG_ESP_LCD_TOUCH_MAX_BUTTONS > 0)
     } else if ((buf[0] & 0x10) == 0x10) {
         /* Read all keys */
@@ -423,6 +425,24 @@ static esp_err_t touch_gt911_read_cfg(esp_lcd_touch_handle_t tp)
 
     ESP_LOGI(TAG, "TouchPad_ID:0x%02x,0x%02x,0x%02x", buf[0], buf[1], buf[2]);
     ESP_LOGI(TAG, "TouchPad_Config_Version:%d", buf[3]);
+
+    /* Disable GT911 auto-sleep so it stays responsive without I2C NACKs */
+    uint8_t auto_sleep_val = 0xFF;
+    if (touch_gt911_i2c_read(tp, 0x8058, &auto_sleep_val, 1) == ESP_OK && auto_sleep_val != 0) {
+        uint8_t cfg[184] = {0};
+        if (touch_gt911_i2c_read(tp, ESP_LCD_TOUCH_GT911_CONFIG_REG, cfg, sizeof(cfg)) == ESP_OK) {
+            cfg[17] = 0; /* offset 17 = 0x8058 - 0x8047 = auto-sleep register */
+            uint16_t sum = 0;
+            for (int i = 0; i < 184; i++) {
+                sum += cfg[i];
+            }
+            uint8_t checksum = ((~sum) + 1) & 0xFF;
+            touch_gt911_i2c_write(tp, 0x8058, 0);
+            touch_gt911_i2c_write(tp, 0x80FF, checksum);
+            touch_gt911_i2c_write(tp, 0x8100, 1);
+            ESP_LOGI(TAG, "GT911 auto-sleep disabled (was %d s)", auto_sleep_val);
+        }
+    }
 
     return ESP_OK;
 }
