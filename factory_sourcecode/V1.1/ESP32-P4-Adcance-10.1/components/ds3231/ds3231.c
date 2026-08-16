@@ -151,7 +151,7 @@ esp_err_t ds3231_sync_to_system(void)
     settimeofday(&tv, NULL);
 
     char buf[64];
-    strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &rtc_tm);
+    strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S (Eastern Time)", &rtc_tm);
     ESP_LOGI(TAG, "System time synchronized from DS3231 RTC: %s", buf);
 
     return ESP_OK;

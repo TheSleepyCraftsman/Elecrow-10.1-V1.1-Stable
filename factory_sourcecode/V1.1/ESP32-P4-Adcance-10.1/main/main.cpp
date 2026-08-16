@@ -95,6 +95,10 @@ void touch_detect_task(void *param)
 
 extern "C" void app_main(void)
 {
+    /* Set US Eastern Timezone (EST/EDT) globally at boot */
+    setenv("TZ", "EST5EDT,M3.2.0,M11.1.0", 1);
+    tzset();
+
     esp_err_t err = nvs_flash_init();
     if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_ERROR_CHECK(nvs_flash_erase());
