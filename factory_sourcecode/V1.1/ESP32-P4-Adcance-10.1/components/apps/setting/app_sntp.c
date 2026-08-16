@@ -1,3 +1,4 @@
+#include "ds3231.h"
 /*
  * SPDX-FileCopyrightText: 2023 Espressif Systems (Shanghai) CO LTD
  *
@@ -39,6 +40,8 @@ static void time_sync_notification_cb(struct timeval *tv)
 {
     ESP_LOGI(TAG, "Notification of a time synchronization event, sec=%lu", tv->tv_sec);
     settimeofday(tv, NULL);
+    /* Auto-sync hardware RTC from NTP */
+    ds3231_sync_from_system();
 }
 
 void app_sntp_init(void)

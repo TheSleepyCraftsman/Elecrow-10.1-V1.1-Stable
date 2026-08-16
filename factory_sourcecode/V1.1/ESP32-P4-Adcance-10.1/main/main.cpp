@@ -1,3 +1,4 @@
+#include "ds3231.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "nvs_flash.h"
@@ -115,6 +116,9 @@ extern "C" void app_main(void)
     ESP_ERROR_CHECK(bsp_extra_codec_init());
 
     stc8_i2c_init();
+    /* Initialize DS3231 / DS1307 RTC and sync system clock */
+    ds3231_init();
+    ds3231_sync_to_system();
     Battery_info_t battery_info = {0};
     stc8_battery_info_get(&battery_info);
     ESP_LOGI(TAG, "adc_voltage = %lu mV", battery_info.adc_voltage);

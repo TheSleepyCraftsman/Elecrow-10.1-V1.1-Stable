@@ -1,6 +1,7 @@
 idf_component_register(
     SRCS main.cpp
-    INCLUDE_DIRS .)
+    INCLUDE_DIRS .
+    REQUIRES ds3231 nvs_flash esp_wifi esp_event esp_netif bsp_extra esp32_p4_function_ev_board zigbee_gateway apps esp-brookesia)
 
 idf_component_get_property(LVGL_LIB lvgl__lvgl COMPONENT_LIB)
 target_compile_options(
