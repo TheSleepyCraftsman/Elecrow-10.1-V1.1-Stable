@@ -748,7 +748,7 @@ CONFIG_PARTITION_TABLE_MD5=y
 #
 # Example Configurations
 #
-# CONFIG_EXAMPLE_ENABLE_SD_CARD is not set
+CONFIG_EXAMPLE_ENABLE_SD_CARD=y
 # end of Example Configurations
 
 #

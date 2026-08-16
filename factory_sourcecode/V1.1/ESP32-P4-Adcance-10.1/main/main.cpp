@@ -109,8 +109,9 @@ extern "C" void app_main(void)
     esp_err_t sd_err = bsp_sdcard_mount();
     if (sd_err != ESP_OK) {
         ESP_LOGE(TAG, "bsp_sdcard_mount failed: %s", esp_err_to_name(sd_err));
+    } else {
+        ESP_LOGI(TAG, "SD card mount successfully at /sdcard");
     }
-    ESP_LOGI(TAG, "SD card mount successfully");
 #endif
 
     ESP_ERROR_CHECK(bsp_extra_codec_init());
