@@ -1,0 +1,41 @@
+# ==============================================================
+# ESP32-H2 OpenThread Zigbee RCP sdkconfig.defaults
+# For Elecrow CrowPanel Advanced 10.1" wireless socket
+#
+# H2 GPIO 23 (U1TXD) -> wireless socket -> P4 GPIO 54 (RXD2)
+# H2 GPIO 24 (U1RXD) -> wireless socket -> P4 GPIO 53 (TXD2)
+# H2 GPIO  9 (IO9)   -> wireless socket -> P4 GPIO  9 (BOOT)
+#
+# Uses built-in ESP-IDF OpenThread component in RCP mode.
+# No external esp-zigbee-lib required.
+# ==============================================================
+
+# Partition table at 0xc000
+CONFIG_PARTITION_TABLE_OFFSET=0xc000
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# ==============================================================
+# OpenThread Radio Co-Processor (RCP) mode
+# H2 acts as the 802.15.4 radio, P4 runs the Zigbee stack
+# ==============================================================
+CONFIG_OPENTHREAD_ENABLED=y
+CONFIG_OPENTHREAD_RADIO=y
+CONFIG_OPENTHREAD_DIAG=n
+CONFIG_OPENTHREAD_COMMISSIONER=n
+CONFIG_OPENTHREAD_JOINER=n
+CONFIG_OPENTHREAD_BORDER_ROUTER=n
+CONFIG_OPENTHREAD_CLI=n
+CONFIG_OPENTHREAD_SRP_CLIENT=n
+CONFIG_OPENTHREAD_DNS_CLIENT=n
+CONFIG_OPENTHREAD_CONSOLE_ENABLE=n
+CONFIG_OPENTHREAD_LOG_LEVEL_DYNAMIC=n
+
+# UART RCP mode (H2 connects to P4 via UART1)
+CONFIG_OPENTHREAD_RCP_UART=y
+CONFIG_OPENTHREAD_UART_PIN_MANUAL=y
+CONFIG_OPENTHREAD_UART_RX_PIN=24      # H2 U1RXD -> P4 GPIO 53 (TXD2)
+CONFIG_OPENTHREAD_UART_TX_PIN=23      # H2 U1TXD -> P4 GPIO 54 (RXD2)
+
+# SW coexistence (required when using Zigbee)
+CONFIG_ESP_COEX_SW_COEXIST_ENABLE=y

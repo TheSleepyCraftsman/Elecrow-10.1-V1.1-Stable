@@ -1,0 +1,4 @@
+## IDF Component Manager Manifest - ESP32-H2 OpenThread Zigbee RCP
+## Uses built-in IDF openthread component - no external dependencies needed
+dependencies:
+  idf: ">=5.1"

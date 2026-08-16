@@ -1,0 +1,7 @@
+# ESP-IDF Partition Table for ESP32-H2 Zigbee RCP
+# Simple factory-only layout (no OTA needed - P4 reflashes via UART bootloader)
+# Partition table at 0xc000, fits in 2MB or 4MB flash
+# Name, Type, SubType, Offset, Size, Flags
+nvs,data,nvs,0xd000,16K,
+phy_init,data,phy,0x11000,4K,
+factory,app,factory,0x20000,1M,
