@@ -7,3 +7,4 @@
 #include "calculator/Calculator.hpp"
 #include "camera/Camera.hpp"
 #include "video_player/VideoPlayer.hpp"
+#include "zigbee_app/ZigbeeApp.hpp"

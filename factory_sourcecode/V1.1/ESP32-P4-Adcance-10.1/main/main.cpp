@@ -172,6 +172,10 @@ extern "C" void app_main(void)
     assert(app_settings != nullptr && "Failed to create app_settings");
     assert((phone->installApp(app_settings) >= 0) && "Failed to begin app_settings");
 
+    ZigbeeApp *zigbee_app = new ZigbeeApp();
+    assert(zigbee_app != nullptr && "Failed to create zigbee_app");
+    assert((phone->installApp(zigbee_app) >= 0) && "Failed to begin zigbee_app");
+
     Game2048 *game_2048 = new Game2048();
     assert(game_2048 != nullptr && "Failed to create game_2048");
     assert((phone->installApp(game_2048) >= 0) && "Failed to begin game_2048");
