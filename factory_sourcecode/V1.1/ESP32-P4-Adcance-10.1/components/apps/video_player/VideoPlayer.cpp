@@ -98,6 +98,37 @@ void AppVideoPlayer::app_show_ui(void)
     lv_obj_set_style_bg_color(cont_col, lv_color_black(), 0);
     lv_obj_set_style_border_width(cont_col, 0, 0);
 
+    if (_midea_info_vect.empty()) {
+        /* Clean Empty State when SD card has no video files */
+        lv_obj_t *empty_card = lv_obj_create(cont_col);
+        lv_obj_set_size(empty_card, BSP_LCD_H_RES - 100, BSP_LCD_V_RES - 140);
+        lv_obj_set_style_bg_color(empty_card, lv_color_make(24, 28, 36), 0);
+        lv_obj_set_style_border_color(empty_card, lv_color_make(45, 52, 68), 0);
+        lv_obj_set_style_border_width(empty_card, 1, 0);
+        lv_obj_set_style_radius(empty_card, 16, 0);
+        lv_obj_set_flex_flow(empty_card, LV_FLEX_FLOW_COLUMN);
+        lv_obj_set_flex_align(empty_card, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+
+        lv_obj_t *icon = lv_label_create(empty_card);
+        lv_label_set_text(icon, LV_SYMBOL_VIDEO);
+        lv_obj_set_style_text_font(icon, &lv_font_montserrat_48, 0);
+        lv_obj_set_style_text_color(icon, lv_color_make(100, 140, 200), 0);
+
+        lv_obj_t *title = lv_label_create(empty_card);
+        lv_label_set_text(title, "No Video Files Found on SD Card");
+        lv_obj_set_style_text_font(title, &lv_font_montserrat_22, 0);
+        lv_obj_set_style_text_color(title, lv_color_make(255, 255, 255), 0);
+        lv_obj_set_style_pad_top(title, 16, 0);
+
+        lv_obj_t *desc = lv_label_create(empty_card);
+        lv_label_set_text(desc, "Please copy MJPEG / AVI video files (.avi / .mjpeg)\ninto the root of your micro SD card (/sdcard/).");
+        lv_obj_set_style_text_font(desc, &lv_font_montserrat_16, 0);
+        lv_obj_set_style_text_color(desc, lv_color_make(160, 175, 195), 0);
+        lv_obj_set_style_text_align(desc, LV_TEXT_ALIGN_CENTER, 0);
+        lv_obj_set_style_pad_top(desc, 12, 0);
+        return;
+    }
+
     lv_obj_t *cont_row = lv_obj_create(cont_col);
     lv_obj_set_size(cont_row, BSP_LCD_H_RES - 20, 80);
     lv_obj_set_flex_flow(cont_row, LV_FLEX_FLOW_ROW);
