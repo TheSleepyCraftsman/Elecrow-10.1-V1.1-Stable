@@ -17,10 +17,10 @@
 #include "esp_sleep.h"
 #include "esp_sntp.h"
 
-#define TIMEZONE        "CST-8"
-#define SERVER_NAME_0   "ntp.aliyun.com"
-#define SERVER_NAME_1   "time.asia.apple.com"
-#define SERVER_NAME_2   "pool.ntp.org"
+#define TIMEZONE        "EST5EDT,M3.2.0,M11.1.0"
+#define SERVER_NAME_0   "pool.ntp.org"
+#define SERVER_NAME_1   "time.nist.gov"
+#define SERVER_NAME_2   "time.google.com"
 
 static const char *TAG = "sntp";
 
@@ -91,7 +91,7 @@ void app_sntp_init(void)
     char strftime_buf[64];
     localtime_r(&now, &timeinfo);
     strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
-    ESP_LOGI(TAG, "The current date/time in Shanghai is: %s", strftime_buf);
+    ESP_LOGI(TAG, "The current date/time (US Eastern Time) is: %s", strftime_buf);
 
     if (sntp_get_sync_mode() == SNTP_SYNC_MODE_SMOOTH) {
         struct timeval outdelta;
