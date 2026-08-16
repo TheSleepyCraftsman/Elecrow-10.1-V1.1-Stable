@@ -537,7 +537,7 @@ void AppSettings::scanWifiAndUpdateUi(void)
     ESP_LOGI(TAG, "Total APs scanned = %u", ap_count);
 #endif
 
-    bsp_display_lock(0);
+    bsp_display_lock(pdMS_TO_TICKS(100));
     if(xEventGroupGetBits(s_wifi_event_group) & WIFI_EVENT_SCANING) {
         deinitWifiListButton();
     }
@@ -570,7 +570,7 @@ void AppSettings::scanWifiAndUpdateUi(void)
         ESP_LOGI(TAG, "signal_strength: %d", _wifi_signal_strength_level);
 #endif
 
-        bsp_display_lock(0);
+        bsp_display_lock(pdMS_TO_TICKS(100));
         if(xEventGroupGetBits(s_wifi_event_group) & WIFI_EVENT_SCANING) {
             initWifiListButton(label_wifi_ssid[i], img_img_wifi_lock[i], wifi_image[i], wifi_connect[i],
                                 ap_info[i].ssid, psk_flag, _wifi_signal_strength_level);     
@@ -636,69 +636,55 @@ void AppSettings::euiRefresTask(void *arg)
         localtime_r(&now, &timeinfo);
         is_time_pm = (timeinfo.tm_hour >= 12);
 
-        bsp_display_lock(0);
-        if(!app->status_bar->setClock(timeinfo.tm_hour, timeinfo.tm_min, is_time_pm)) {
-            ESP_LOGE(TAG, "Set clock failed");
-        }
-        bsp_display_unlock();
-
-        bsp_display_lock(0);
         extern uint32_t adc_voltage;
         extern uint32_t bat_voltage;
         extern uint32_t bat_level;
         extern uint8_t bat_state;
         extern uint8_t led_state;
-        if (1==bat_state) {
-            if(!app->status_bar->setBatteryPercent(1, bat_level)) {
-                ESP_LOGE(TAG, "Set battery failed");
-            }
-        }
-        else {
-            if(!app->status_bar->setBatteryPercent(0, bat_level)) {
-                ESP_LOGE(TAG, "Set battery failed");
-            }
-        }
-        
-        bsp_display_unlock();
-        
 
-        // Update WiFi icon state
-        if((xEventGroupGetBits(s_wifi_event_group) & WIFI_EVENT_CONNECTED)) {
-            app_sntp_init();
+        if (bsp_display_lock(pdMS_TO_TICKS(100))) {
+            app->status_bar->setClock(timeinfo.tm_hour, timeinfo.tm_min, is_time_pm);
+            if (1 == bat_state) {
+                app->status_bar->setBatteryPercent(1, bat_level);
+            } else {
+                app->status_bar->setBatteryPercent(0, bat_level);
+            }
 
-            // Query active Wi-Fi AP info to set the signal strength level
-            wifi_ap_record_t ap_info;
-            if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK) {
-                int rssi = ap_info.rssi;
-                if (rssi >= -55) {
-                    app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_GOOD;
-                } else if (rssi >= -70) {
-                    app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_MODERATE;
-                } else if (rssi >= -85) {
-                    app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_WEAK;
+            // Update WiFi icon state
+            if (xEventGroupGetBits(s_wifi_event_group) & WIFI_EVENT_CONNECTED) {
+                wifi_ap_record_t ap_info;
+                if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK) {
+                    int rssi = ap_info.rssi;
+                    if (rssi >= -55) {
+                        app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_GOOD;
+                    } else if (rssi >= -70) {
+                        app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_MODERATE;
+                    } else if (rssi >= -85) {
+                        app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_WEAK;
+                    } else {
+                        app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_NONE;
+                    }
                 } else {
-                    app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_NONE;
+                    app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_GOOD;
+                }
+
+                if (app->_wifi_signal_strength_level == WIFI_SIGNAL_STRENGTH_NONE) {
+                    app->status_bar->setWifiIconState(0);
+                } else if (app->_wifi_signal_strength_level == WIFI_SIGNAL_STRENGTH_WEAK) {
+                    app->status_bar->setWifiIconState(1);
+                } else if (app->_wifi_signal_strength_level == WIFI_SIGNAL_STRENGTH_MODERATE) {
+                    app->status_bar->setWifiIconState(2);
+                } else {
+                    app->status_bar->setWifiIconState(3);
                 }
             } else {
-                // Default to good signal strength if connected but couldn't get RSSI yet
-                app->_wifi_signal_strength_level = WIFI_SIGNAL_STRENGTH_GOOD;
-            }
-
-            bsp_display_lock(0);
-            if(app->_wifi_signal_strength_level == WIFI_SIGNAL_STRENGTH_NONE) {
                 app->status_bar->setWifiIconState(0);
-            } else if(app->_wifi_signal_strength_level == WIFI_SIGNAL_STRENGTH_WEAK) {
-                app->status_bar->setWifiIconState(1);
-            } else if(app->_wifi_signal_strength_level == WIFI_SIGNAL_STRENGTH_MODERATE) {
-                app->status_bar->setWifiIconState(2);
-            } else if (app->_wifi_signal_strength_level == WIFI_SIGNAL_STRENGTH_GOOD) {
-                app->status_bar->setWifiIconState(3);
             }
             bsp_display_unlock();
-        } else {
-            bsp_display_lock(0);
-            app->status_bar->setWifiIconState(0);
-            bsp_display_unlock();
+        }
+
+        if (xEventGroupGetBits(s_wifi_event_group) & WIFI_EVENT_CONNECTED) {
+            app_sntp_init();
         }
 
         /* Updte Smart Gadget app */
@@ -714,7 +700,7 @@ void AppSettings::euiRefresTask(void *arg)
                         "free psram size: %d KB, total psram size: %d KB",
                         free_sram_size_kb, total_sram_size_kb, free_psram_size_kb, total_psram_size_kb);
 
-            bsp_display_lock(0);
+            bsp_display_lock(pdMS_TO_TICKS(100));
             if(!app->backstage->setMemoryLabel(free_sram_size_kb, total_sram_size_kb, free_psram_size_kb, total_psram_size_kb)) {
                 ESP_LOGE(TAG, "Update memory usage failed");
             }
@@ -801,7 +787,7 @@ void AppSettings::wifiConnectTask(void *arg)
         ESP_LOGI(TAG, "Connected successfully");
 
         if (!app->_is_ui_del) {
-            bsp_display_lock(0);
+            bsp_display_lock(pdMS_TO_TICKS(100));
             app->processWifiConnect(WIFI_CONNECT_SUCCESS);
             bsp_display_unlock();
         }
@@ -809,7 +795,7 @@ void AppSettings::wifiConnectTask(void *arg)
         vTaskDelay(pdMS_TO_TICKS(WIFI_CONNECT_UI_WAIT_TIME_MS));
 
         if (!app->_is_ui_del) {
-            bsp_display_lock(0);
+            bsp_display_lock(pdMS_TO_TICKS(100));
             app->processWifiConnect(WIFI_CONNECT_HIDE);
             // lv_obj_clear_flag(ui_KeyboardScreenSettingVerification, LV_OBJ_FLAG_HIDDEN);
             lv_textarea_set_text(ui_TextAreaScreenSettingVerificationPassword, "");
@@ -822,7 +808,7 @@ void AppSettings::wifiConnectTask(void *arg)
         ESP_LOGI(TAG, "Connect failed");
 
         if (!app->_is_ui_del) {
-            bsp_display_lock(0);
+            bsp_display_lock(pdMS_TO_TICKS(100));
             app->processWifiConnect(WIFI_CONNECT_FAIL);
             bsp_display_unlock();
         }
@@ -830,7 +816,7 @@ void AppSettings::wifiConnectTask(void *arg)
         vTaskDelay(pdMS_TO_TICKS(WIFI_CONNECT_UI_WAIT_TIME_MS));
 
         if (!app->_is_ui_del) {
-            bsp_display_lock(0);
+            bsp_display_lock(pdMS_TO_TICKS(100));
             app->processWifiConnect(WIFI_CONNECT_HIDE);
             // lv_obj_clear_flag(ui_KeyboardScreenSettingVerification, LV_OBJ_FLAG_HIDDEN);
             lv_textarea_set_text(ui_TextAreaScreenSettingVerificationPassword, "");
@@ -867,7 +853,7 @@ void AppSettings::wifiEventHandler(void* arg, esp_event_base_t event_base, int32
         if(lv_obj_has_flag(ui_PanelScreenSettingWiFiList, LV_OBJ_FLAG_HIDDEN) &&
            xEventGroupGetBits(s_wifi_event_group) & WIFI_EVENT_SCANING) {
             if (!app->_is_ui_del) {
-                bsp_display_lock(0);
+                bsp_display_lock(pdMS_TO_TICKS(100));
                 lv_obj_clear_flag(ui_PanelScreenSettingWiFiList, LV_OBJ_FLAG_HIDDEN);
                 lv_obj_add_flag(ui_SpinnerScreenSettingWiFi, LV_OBJ_FLAG_HIDDEN);
                 lv_obj_add_flag(ui_SwitchPanelScreenSettingWiFiSwitch, LV_OBJ_FLAG_CLICKABLE);
