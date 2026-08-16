@@ -491,12 +491,18 @@ esp_err_t AppSettings::initWifi()
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
 
-    esp_event_handler_instance_t instance_any_id;
+    esp_event_handler_instance_t instance_wifi;
+    esp_event_handler_instance_t instance_ip;
     ESP_ERROR_CHECK(esp_event_handler_instance_register(WIFI_EVENT,
                                                         ESP_EVENT_ANY_ID,
                                                         &wifiEventHandler,
                                                         this,
-                                                        &instance_any_id));
+                                                        &instance_wifi));
+    ESP_ERROR_CHECK(esp_event_handler_instance_register(IP_EVENT,
+                                                        IP_EVENT_STA_GOT_IP,
+                                                        &wifiEventHandler,
+                                                        this,
+                                                        &instance_ip));
 
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
     ESP_ERROR_CHECK(esp_wifi_start());
@@ -840,15 +846,25 @@ void AppSettings::wifiEventHandler(void* arg, esp_event_base_t event_base, int32
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
         ESP_LOGI(TAG, "Wi-Fi started, calling esp_wifi_connect() to auto-connect to cached AP...");
         esp_wifi_connect();
-    } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED) {
+    } else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
+        ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
+        ESP_LOGI(TAG, "Wi-Fi Got IP: " IPSTR, IP2STR(&event->ip_info.ip));
         xEventGroupSetBits(s_wifi_event_group, WIFI_EVENT_CONNECTED);
-        ESP_LOGI(TAG, "connected to ap SSID:%s, password:%s.", st_wifi_ssid, st_wifi_password);
+    } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED) {
+        ESP_LOGI(TAG, "Wi-Fi connected to AP (waiting for DHCP IP)...");
     } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
         xEventGroupClearBits(s_wifi_event_group, WIFI_EVENT_CONNECTED);
-        ESP_LOGI(TAG, "disconnected from ap SSID:%s, password:%s.", st_wifi_ssid, st_wifi_password);
-        memset(st_wifi_ssid, 0, sizeof(st_wifi_ssid));
+        ESP_LOGW(TAG, "Wi-Fi disconnected / connect attempt failed.");
 
-        // app->back();
+        /* Auto-reconnect with 3-second delay if Wi-Fi is enabled in Settings */
+        if (app && app->_nvs_param_map[NVS_KEY_WIFI_ENABLE]) {
+            ESP_LOGI(TAG, "Auto-reconnecting to Wi-Fi in 3 seconds...");
+            xTaskCreate([](void *) {
+                vTaskDelay(pdMS_TO_TICKS(3000));
+                esp_wifi_connect();
+                vTaskDelete(NULL);
+            }, "wifi_reconnect", 2048, NULL, 3, NULL);
+        }
     } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_SCAN_DONE) {
         if(lv_obj_has_flag(ui_PanelScreenSettingWiFiList, LV_OBJ_FLAG_HIDDEN) &&
            xEventGroupGetBits(s_wifi_event_group) & WIFI_EVENT_SCANING) {
